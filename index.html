@@ -3,31 +3,87 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>GREEN &amp; 5S HOSPITAL SYSTEM</title>
+<title>GREEN &amp; 5S HOSPITAL SYSTEM · ระบบติดตามสิ่งแวดล้อมโรงพยาบาล</title>
 <meta name="description" content="ระบบบริหารจัดการสิ่งแวดล้อม 5ส และการจัดการขยะ โรงพยาบาล">
+<meta name="theme-color" content="#047857">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%8C%BF%3C/text%3E%3C/svg%3E">
 <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;600;700&display=swap" rel="stylesheet">
 <style>
 *{box-sizing:border-box;margin:0}
 html,body{height:100%}
-body{font-family:'Prompt',sans-serif;background:#f8fafc;color:#0f172a}
+body{font-family:'Prompt',sans-serif;background:#f6faf8;color:#0f172a;overflow:hidden}
 #app{position:fixed;inset:0;width:100%;height:100%;border:0;display:none}
-#loading{z-index:2}
-#loading,#setup{position:fixed;inset:0;display:none;align-items:center;justify-content:center;padding:24px;text-align:center}
-.bg{background:linear-gradient(135deg,#1e3a8a 0%,#2563eb 55%,#d97706 130%);color:#fff}
-.spin{width:44px;height:44px;border:4px solid rgba(255,255,255,.3);border-top-color:#fff;border-radius:50%;animation:s 1s linear infinite;margin:0 auto 18px}
-@keyframes s{to{transform:rotate(360deg)}}
-h1{font-size:clamp(22px,4vw,32px);font-weight:700}
-p{font-weight:300;color:#dbeafe;margin-top:8px}
-.box{max-width:560px;background:#fff;color:#0f172a;border-radius:20px;padding:28px;box-shadow:0 20px 40px rgba(0,0,0,.25);text-align:left}
-.box h2{color:#1e3a8a;font-size:20px;margin-bottom:10px}
+#loading,#setup{position:fixed;inset:0;display:none;align-items:center;justify-content:center;padding:24px;text-align:center;overflow:hidden}
+#loading{z-index:3;transition:opacity .7s ease, visibility .7s}
+#loading.out{opacity:0;visibility:hidden}
+.bg{background:linear-gradient(160deg,#064e3b 0%,#047857 38%,#0e7490 72%,#1e40af 100%);color:#fff}
+.wrap{position:relative;z-index:2}
+
+/* โลโก้: โลกหมุน + วงแหวนเรดาร์ติดตาม + ใบไม้ */
+.logo{position:relative;width:132px;height:132px;margin:0 auto 26px}
+.logo .ring{position:absolute;inset:0;border-radius:50%;border:2px solid rgba(253,230,138,.8);animation:radar 2.4s ease-out infinite}
+.logo .ring:nth-child(2){animation-delay:1.2s}
+.logo .globe{position:absolute;inset:18px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#6ee7b7,#059669 55%,#065f46);box-shadow:inset -10px -12px 24px rgba(0,0,0,.25),0 10px 30px -8px rgba(0,0,0,.4);overflow:hidden}
+.logo .land{position:absolute;top:0;left:0;width:200%;height:100%;animation:turn 9s linear infinite}
+.logo .orbit{position:absolute;inset:-6px;animation:orbit 5s linear infinite}
+.logo .orbit span{position:absolute;top:-4px;left:50%;font-size:22px;transform:translateX(-50%)}
+@keyframes radar{from{transform:scale(.7);opacity:.9}to{transform:scale(1.5);opacity:0}}
+@keyframes turn{to{transform:translateX(-50%)}}
+@keyframes orbit{to{transform:rotate(360deg)}}
+
+h1{font-size:clamp(22px,4vw,34px);font-weight:700;letter-spacing:.02em}
+.sub{font-weight:300;color:#d1fae5;margin-top:6px;font-size:15px}
+.status{margin-top:22px;height:22px;position:relative;overflow:hidden;font-size:13.5px;color:#ecfdf5}
+.status span{position:absolute;left:0;right:0;opacity:0;transform:translateY(100%);transition:all .45s}
+.status span.on{opacity:1;transform:none}
+.bar{width:220px;height:4px;border-radius:9px;background:rgba(255,255,255,.2);margin:16px auto 0;overflow:hidden}
+.bar i{display:block;height:100%;width:40%;border-radius:9px;background:linear-gradient(90deg,#fde68a,#6ee7b7);animation:load 1.4s ease-in-out infinite}
+@keyframes load{from{transform:translateX(-100%)}to{transform:translateX(250%)}}
+
+/* ทิวทัศน์ด้านล่าง */
+.hills{position:absolute;left:0;bottom:0;width:200%;animation:slide linear infinite;pointer-events:none}
+@keyframes slide{to{transform:translateX(-50%)}}
+.leaf{position:absolute;top:-30px;pointer-events:none;animation:fall linear infinite}
+.leaf b{display:block;animation:flutter 2.4s ease-in-out infinite alternate}
+@keyframes fall{0%{transform:translate(0,0);opacity:0}10%{opacity:.9}100%{transform:translate(-140px,110vh);opacity:0}}
+@keyframes flutter{from{transform:rotate(-35deg)}to{transform:rotate(40deg)}}
+
+.box{max-width:560px;background:#fff;color:#0f172a;border-radius:22px;padding:28px;box-shadow:0 24px 50px rgba(0,0,0,.28);text-align:left}
+.box h2{color:#065f46;font-size:20px;margin-bottom:10px}
 .box ol{padding-left:20px;line-height:1.9;font-size:14px}
-code{background:#eff6ff;color:#1e3a8a;padding:1px 7px;border-radius:6px;font-size:13px}
-a.alt{position:fixed;right:14px;bottom:14px;background:#fff;color:#1e3a8a;font-size:12px;padding:7px 12px;border-radius:99px;box-shadow:0 4px 14px rgba(0,0,0,.18);text-decoration:none;display:none;z-index:5}
+code{background:#ecfdf5;color:#065f46;padding:1px 7px;border-radius:6px;font-size:13px}
+a.alt{position:fixed;right:14px;bottom:14px;background:rgba(255,255,255,.95);color:#065f46;font-size:12px;padding:7px 13px;border-radius:99px;box-shadow:0 4px 14px rgba(0,0,0,.18);text-decoration:none;display:none;z-index:5;transition:transform .2s}
+a.alt:hover{transform:translateY(-2px)}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.leaf{display:none}}
 </style>
 </head>
 <body>
 <!-- หน้านี้เป็นทางเข้าเดียวของระบบ: เปิดเว็บแอป (หน้าหลักแบบการ์ด) เต็มจอ ผู้ใช้จำลิงก์เดียวพอ -->
-<div id="loading" class="bg"><div><div class="spin"></div><h1>GREEN &amp; 5S HOSPITAL SYSTEM</h1><p>กำลังเปิดระบบ...</p></div></div>
+<div id="loading" class="bg" role="status" aria-live="polite">
+  <div id="leaves" aria-hidden="true"></div>
+  <div class="wrap">
+    <div class="logo" aria-hidden="true">
+      <div class="ring"></div><div class="ring"></div>
+      <div class="globe">
+        <svg class="land" viewBox="0 0 192 96" preserveAspectRatio="none"><g fill="#a7f3d0" fill-opacity=".7">
+          <path d="M8 30c10-12 26-10 30 0s-6 18-14 22-20-8-16-22z"/><path d="M52 60c8-6 20-4 22 6s-10 16-18 12-10-12-4-18z"/><path d="M70 18c10-6 22 0 20 10s-14 8-20 4-6-10 0-14z"/>
+          <path d="M104 30c10-12 26-10 30 0s-6 18-14 22-20-8-16-22z"/><path d="M148 60c8-6 20-4 22 6s-10 16-18 12-10-12-4-18z"/><path d="M166 18c10-6 22 0 20 10s-14 8-20 4-6-10 0-14z"/></g></svg>
+      </div>
+      <div class="orbit"><span>🍃</span></div>
+    </div>
+    <h1>GREEN &amp; 5S HOSPITAL SYSTEM</h1>
+    <p class="sub">ระบบบริหารจัดการสิ่งแวดล้อม 5ส และการจัดการขยะ</p>
+    <div class="status" id="status">
+      <span class="on">🌱 กำลังเปิดระบบ...</span>
+      <span>🏥 เชื่อมต่อข้อมูลหน่วยงาน</span>
+      <span>♻️ เตรียมข้อมูลการตรวจถังขยะ</span>
+      <span>📊 จัดเตรียมรายงานและสถิติ</span>
+    </div>
+    <div class="bar"><i></i></div>
+  </div>
+  <svg class="hills" style="height:120px;animation-duration:50s;opacity:.35" viewBox="0 0 2400 120" preserveAspectRatio="none" aria-hidden="true"><path fill="#a7f3d0" d="M0 60 Q150 15 300 60 T600 60 T900 60 T1200 60 T1500 60 T1800 60 T2100 60 T2400 60 V120 H0Z"/></svg>
+  <svg class="hills" style="height:70px;animation-duration:30s" viewBox="0 0 2400 70" preserveAspectRatio="none" aria-hidden="true"><path fill="#10b981" fill-opacity=".5" d="M0 35 Q200 5 400 35 T800 35 T1200 35 T1600 35 T2000 35 T2400 35 V70 H0Z"/></svg>
+</div>
 
 <div id="setup" class="bg">
   <div class="box">
@@ -48,14 +104,32 @@ a.alt{position:fixed;right:14px;bottom:14px;background:#fff;color:#1e3a8a;font-s
 const WEBAPP_URL = 'https://script.google.com/macros/s/AKfycby4v0Qq10wd1Yicw_vka1EqNiliKwHGXzDCWcnV23xmCAzxzwG44C2vbYjBvZlBPzE1UA/exec';
 // ====================================================================
 (function () {
-  const show = id => { document.getElementById(id).style.display = id === 'app' ? 'block' : 'flex'; };
+  const $ = id => document.getElementById(id);
+  const show = id => { $(id).style.display = id === 'app' ? 'block' : 'flex'; };
   if (!/^https:\/\/script\.google\.com\/.+\/exec$/.test(WEBAPP_URL)) { show('setup'); return; }
+
+  // ใบไม้ปลิวและข้อความสถานะหมุนเวียน
+  const reduced = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (!reduced) {
+    const em = ['🍃', '🌿', '🍂', '🌱'];
+    $('leaves').innerHTML = Array.from({ length: 12 }, (_, i) =>
+      `<span class="leaf" style="left:${5 + i * 8}%;font-size:${14 + (i * 5 % 12)}px;animation-duration:${8 + (i * 3 % 7)}s;animation-delay:-${(i * 1.7).toFixed(1)}s"><b>${em[i % em.length]}</b></span>`).join('');
+  }
+  const msgs = document.querySelectorAll('#status span');
+  let k = 0;
+  const timer = setInterval(() => { msgs[k].classList.remove('on'); k = (k + 1) % msgs.length; msgs[k].classList.add('on'); }, 1600);
+
   // ส่งต่อพารามิเตอร์ เช่น index.html?tab=bin เพื่อเปิดตรงเข้ากิจกรรม
   const url = WEBAPP_URL + location.search;
-  const app = document.getElementById('app'), alt = document.getElementById('alt');
+  const app = $('app'), alt = $('alt');
   alt.href = url;
   show('loading');
-  app.onload = () => { document.getElementById('loading').style.display = 'none'; alt.style.display = 'block'; };
+  app.onload = () => {
+    clearInterval(timer);
+    $('loading').classList.add('out');
+    setTimeout(() => { $('loading').style.display = 'none'; }, 750);
+    alt.style.display = 'block';
+  };
   app.src = url;
   show('app');
 })();
