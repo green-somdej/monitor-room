@@ -3,117 +3,62 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>ระบบติดตามสิ่งแวดล้อมและ 5ส โรงพยาบาล</title>
-<meta name="description" content="ประเมิน ติดตาม และรายงานผลด้านสิ่งแวดล้อม 5ส และการจัดการขยะ ในที่เดียว">
-<link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<title>GREEN &amp; 5S HOSPITAL SYSTEM</title>
+<meta name="description" content="ระบบบริหารจัดการสิ่งแวดล้อม 5ส และการจัดการขยะ โรงพยาบาล">
+<link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;600;700&display=swap" rel="stylesheet">
 <style>
-:root{--navy:#1e3a8a;--blue:#2563eb;--gold:#d97706;--ink:#0f172a;--mute:#64748b;--line:#e2e8f0;--bg:#f8fafc}
 *{box-sizing:border-box;margin:0}
-body{font-family:'Prompt',sans-serif;color:var(--ink);background:var(--bg);line-height:1.6}
-a{color:inherit;text-decoration:none}
-.wrap{max-width:1080px;margin:0 auto;padding:0 20px}
-header.hero{background:linear-gradient(135deg,#1e3a8a 0%,#2563eb 55%,#d97706 130%);color:#fff;padding:72px 0 96px;position:relative;overflow:hidden}
-header.hero::after{content:"";position:absolute;right:-120px;top:-120px;width:420px;height:420px;border-radius:50%;background:rgba(255,255,255,.08)}
-.badge{display:inline-block;background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.3);padding:4px 14px;border-radius:99px;font-size:13px;margin-bottom:18px}
-h1{font-size:clamp(28px,5vw,46px);font-weight:700;line-height:1.25;max-width:760px}
-.sub{margin-top:14px;font-size:18px;font-weight:300;max-width:640px;color:#dbeafe}
-.cta{margin-top:30px;display:flex;gap:12px;flex-wrap:wrap}
-.btn{padding:12px 24px;border-radius:12px;font-weight:600;font-size:15px;transition:.2s}
-.btn.primary{background:#fff;color:var(--navy)}.btn.primary:hover{transform:translateY(-2px);box-shadow:0 8px 20px rgba(0,0,0,.2)}
-.btn.ghost{border:1px solid rgba(255,255,255,.5);color:#fff}.btn.ghost:hover{background:rgba(255,255,255,.12)}
-.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:14px;margin:-48px auto 0;position:relative;z-index:2}
-.stat{background:#fff;border:1px solid var(--line);border-radius:16px;padding:20px;box-shadow:0 6px 18px rgba(15,23,42,.06)}
-.stat b{display:block;font-size:30px;color:var(--navy)}.stat span{font-size:13px;color:var(--mute)}
-section{padding:64px 0 0}
-h2{font-size:26px;color:var(--navy);margin-bottom:6px}
-.lead{color:var(--mute);margin-bottom:28px}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(310px,1fr));gap:16px}
-.card{background:#fff;border:1px solid var(--line);border-radius:16px;padding:22px;transition:.2s}
-.card:hover{transform:translateY(-3px);box-shadow:0 10px 24px rgba(37,99,235,.12);border-color:#bfdbfe}
-.card .ic{font-size:28px}.card h3{margin:8px 0 4px;font-size:17px}.card p{font-size:14px;color:var(--mute)}
-.card.new{border-color:var(--gold);position:relative}
-.card.new::after{content:"ใหม่";position:absolute;top:14px;right:14px;background:var(--gold);color:#fff;font-size:11px;font-weight:600;padding:1px 10px;border-radius:99px}
-.demo{background:#fff;border:1px solid var(--line);border-radius:18px;padding:24px;display:grid;grid-template-columns:1fr 1fr;gap:28px}
-@media(max-width:760px){.demo{grid-template-columns:1fr}}
-table{width:100%;border-collapse:collapse;font-size:14px}
-td{padding:9px 6px;border-bottom:1px solid var(--line)}td:first-child{color:var(--mute);width:42%}
-.result{background:#fffbeb;border:1px solid #fcd34d;border-radius:14px;padding:18px;align-self:start}
-.result .big{font-size:42px;font-weight:700;color:var(--gold)}
-.bar{height:10px;background:#e2e8f0;border-radius:99px;overflow:hidden;margin:10px 0}.bar i{display:block;height:100%;width:60%;background:#f59e0b}
-.legend{display:flex;gap:14px;flex-wrap:wrap;font-size:13px;margin-top:10px}
-.steps{counter-reset:s;display:grid;gap:12px}
-.step{background:#fff;border:1px solid var(--line);border-radius:14px;padding:16px 16px 16px 60px;position:relative;font-size:15px}
-.step::before{counter-increment:s;content:counter(s);position:absolute;left:16px;top:14px;width:30px;height:30px;border-radius:50%;background:var(--blue);color:#fff;display:grid;place-items:center;font-weight:600}
-code{background:#eff6ff;color:var(--navy);padding:1px 7px;border-radius:6px;font-size:13px}
-footer{margin-top:72px;padding:28px 0;text-align:center;color:var(--mute);font-size:14px;border-top:1px solid var(--line)}
+html,body{height:100%}
+body{font-family:'Prompt',sans-serif;background:#f8fafc;color:#0f172a}
+#app{position:fixed;inset:0;width:100%;height:100%;border:0;display:none}
+#loading{z-index:2}
+#loading,#setup{position:fixed;inset:0;display:none;align-items:center;justify-content:center;padding:24px;text-align:center}
+.bg{background:linear-gradient(135deg,#1e3a8a 0%,#2563eb 55%,#d97706 130%);color:#fff}
+.spin{width:44px;height:44px;border:4px solid rgba(255,255,255,.3);border-top-color:#fff;border-radius:50%;animation:s 1s linear infinite;margin:0 auto 18px}
+@keyframes s{to{transform:rotate(360deg)}}
+h1{font-size:clamp(22px,4vw,32px);font-weight:700}
+p{font-weight:300;color:#dbeafe;margin-top:8px}
+.box{max-width:560px;background:#fff;color:#0f172a;border-radius:20px;padding:28px;box-shadow:0 20px 40px rgba(0,0,0,.25);text-align:left}
+.box h2{color:#1e3a8a;font-size:20px;margin-bottom:10px}
+.box ol{padding-left:20px;line-height:1.9;font-size:14px}
+code{background:#eff6ff;color:#1e3a8a;padding:1px 7px;border-radius:6px;font-size:13px}
+a.alt{position:fixed;right:14px;bottom:14px;background:#fff;color:#1e3a8a;font-size:12px;padding:7px 12px;border-radius:99px;box-shadow:0 4px 14px rgba(0,0,0,.18);text-decoration:none;display:none;z-index:5}
 </style>
 </head>
 <body>
-<header class="hero"><div class="wrap">
-  <span class="badge">🌿 Hospital Environment &amp; 5S Monitoring</span>
-  <h1>ระบบติดตามสิ่งแวดล้อมและ 5ส โรงพยาบาล</h1>
-  <p class="sub">ประเมิน ติดตาม และรายงานผลด้านสิ่งแวดล้อม กิจกรรม 5ส และการจัดการขยะ ในที่เดียว ใช้ข้อมูลจริงเพื่อตัดสินใจและปรับปรุงได้ทันที</p>
-  <div class="cta">
-    <a class="btn primary" href="#features">ดูความสามารถ</a>
-    <a class="btn ghost" href="#waste">โมดูลตรวจถังขยะ</a>
-    <a class="btn ghost" href="#install">วิธีติดตั้ง</a>
+<!-- หน้านี้เป็นทางเข้าเดียวของระบบ: เปิดเว็บแอป (หน้าหลักแบบการ์ด) เต็มจอ ผู้ใช้จำลิงก์เดียวพอ -->
+<div id="loading" class="bg"><div><div class="spin"></div><h1>GREEN &amp; 5S HOSPITAL SYSTEM</h1><p>กำลังเปิดระบบ...</p></div></div>
+
+<div id="setup" class="bg">
+  <div class="box">
+    <h2>⚙️ ตั้งค่าครั้งแรก (สำหรับผู้ดูแล)</h2>
+    <ol>
+      <li>เปิด Apps Script → <b>ทำให้ใช้งานได้ → การทำให้ใช้งานได้รายการใหม่ → เว็บแอป</b></li>
+      <li>ตั้ง “ผู้มีสิทธิ์เข้าถึง” ให้ผู้ใช้เปิดได้ แล้วคัดลอก URL ที่ลงท้าย <code>/exec</code></li>
+      <li>แก้ค่า <code>WEBAPP_URL</code> ในไฟล์ <code>index.html</code> นี้ แล้ว commit ขึ้น GitHub</li>
+    </ol>
   </div>
-</div></header>
-
-<div class="wrap">
-  <div class="stats">
-    <div class="stat"><b>6</b><span>โมดูลในระบบเดียว</span></div>
-    <div class="stat"><b>12 ชม.</b><span>กำหนดแก้ไขปัญหาขยะ</span></div>
-    <div class="stat"><b>≥ 95%</b><span>เป้าหมายทิ้งขยะถูกต้อง</span></div>
-    <div class="stat"><b>฿0</b><span>ไม่มีค่าเซิร์ฟเวอร์</span></div>
-  </div>
-
-  <section id="features">
-    <h2>ความสามารถหลัก</h2><p class="lead">ทุกโมดูลใช้ข้อมูลชุดเดียวกัน ดูภาพรวมระดับผู้บริหารและรายละเอียดรายหน่วยงานได้</p>
-    <div class="grid">
-      <div class="card"><div class="ic">🌱</div><h3>ประเมินสิ่งแวดล้อม</h3><p>บันทึกคะแนนรายหน่วยงาน/เดือน คำนวณร้อยละและระดับผลอัตโนมัติ พร้อมอีเมลยืนยัน</p></div>
-      <div class="card"><div class="ic">🧹</div><h3>ติดตามกิจกรรม 5ส</h3><p>บันทึกปัญหาตามพื้นที่ ติดตามความคืบหน้า แนบภาพหลังแก้ไข</p></div>
-      <div class="card new"><div class="ic">🗑️</div><h3>ตรวจถังขยะ</h3><p>บันทึกจำนวนถังที่ตรวจ/พบทิ้งผิด พร้อมรายละเอียด และดูสถิติอัตราทิ้งถูกต้อง</p></div>
-      <div class="card"><div class="ic">📸</div><h3>แจ้งปัญหาขยะ</h3><p>แจ้งพร้อมภาพ เตือนอัตโนมัติเมื่อใกล้และเกินกำหนด 12 ชั่วโมง</p></div>
-      <div class="card"><div class="ic">📊</div><h3>แดชบอร์ดและรายงาน</h3><p>สรุปรายเดือน/ปี รายงานผู้บริหารพิมพ์เป็น PDF รายงานขยะรายวัน/สัปดาห์/เดือน</p></div>
-      <div class="card"><div class="ic">🔗</div><h3>ลิงก์รายหน่วยงาน</h3><p>แต่ละหน่วยงานดูผลและบันทึกการแก้ไขของตนเองผ่านลิงก์เดียว</p></div>
-    </div>
-  </section>
-
-  <section id="waste">
-    <h2>🗑️ โมดูลตรวจถังขยะ</h2><p class="lead">วัดอัตราการคัดแยกขยะถูกต้อง และชี้เป้าหน่วยงานหรือชั้นที่ต้องปรับปรุง</p>
-    <div class="demo">
-      <div>
-        <table>
-          <tr><td>หน่วยงาน / พื้นที่</td><td>หอผู้ป่วยใน 5</td></tr>
-          <tr><td>อาคาร</td><td>อาคารอนุสรณ์ ๑๐๐ ปี</td></tr>
-          <tr><td>ชั้น</td><td>5</td></tr>
-          <tr><td>จำนวนถังที่ตรวจ</td><td><b>5 ถัง</b></td></tr>
-          <tr><td>พบการทิ้งผิด</td><td><b style="color:#dc2626">2 ถัง</b></td></tr>
-          <tr><td>รายละเอียด</td><td>พบที่ห้องพักเจ้าหน้าที่ ทิ้งเปลือกกล้วยในถังขยะทั่วไป</td></tr>
-        </table>
-      </div>
-      <div class="result">
-        <div style="font-size:13px;color:#92400e">ทิ้งถูกต้อง (คำนวณทันที)</div>
-        <div class="big">60%</div>
-        <div class="bar"><i></i></div>
-        <div style="font-size:14px">3 จาก 5 ถัง · ควรเร่งปรับปรุง</div>
-        <div class="legend"><span>🔵 ≥ 95%</span><span>🟡 80–94%</span><span>🔴 &lt; 80%</span></div>
-      </div>
-    </div>
-  </section>
-
-  <section id="install">
-    <h2>วิธีติดตั้ง</h2><p class="lead">ใช้เวลาไม่ถึง 10 นาที ไม่ต้องมีเซิร์ฟเวอร์</p>
-    <div class="steps">
-      <div class="step">สร้าง Google Sheet ที่มีชีต <code>หน่วยงาน</code> <code>บันทึกข้อมูล</code> <code>ติดตาม5ส</code></div>
-      <div class="step">เปิด <b>ส่วนขยาย → Apps Script</b> แล้วคัดลอกไฟล์ <code>.gs</code> และ <code>.html</code> เข้าไป</div>
-      <div class="step">รันฟังก์ชัน <code>setupWasteSystem</code> หนึ่งครั้ง เพื่อสร้างชีตขยะและตั้งเวลาทำงานรายชั่วโมง</div>
-      <div class="step">เลือก <b>ทำให้ใช้งานได้ → เว็บแอป</b> แล้วแชร์ลิงก์ เช่น <code>?page=waste&amp;tab=bin</code></div>
-    </div>
-  </section>
 </div>
 
-<footer>พัฒนาเพื่อสนับสนุนงานสิ่งแวดล้อมและความปลอดภัยของโรงพยาบาล 💙</footer>
+<iframe id="app" title="GREEN & 5S HOSPITAL SYSTEM" allow="camera; clipboard-write" referrerpolicy="no-referrer-when-downgrade"></iframe>
+<a id="alt" class="alt" target="_blank" rel="noopener">เปิดในแท็บใหม่ ↗</a>
+
+<script>
+// ===== ผู้ดูแลแก้บรรทัดนี้บรรทัดเดียว: URL เว็บแอปที่ลงท้าย /exec =====
+const WEBAPP_URL = 'https://script.google.com/macros/s/AKfycby4v0Qq10wd1Yicw_vka1EqNiliKwHGXzDCWcnV23xmCAzxzwG44C2vbYjBvZlBPzE1UA/exec';
+// ====================================================================
+(function () {
+  const show = id => { document.getElementById(id).style.display = id === 'app' ? 'block' : 'flex'; };
+  if (!/^https:\/\/script\.google\.com\/.+\/exec$/.test(WEBAPP_URL)) { show('setup'); return; }
+  // ส่งต่อพารามิเตอร์ เช่น index.html?tab=bin เพื่อเปิดตรงเข้ากิจกรรม
+  const url = WEBAPP_URL + location.search;
+  const app = document.getElementById('app'), alt = document.getElementById('alt');
+  alt.href = url;
+  show('loading');
+  app.onload = () => { document.getElementById('loading').style.display = 'none'; alt.style.display = 'block'; };
+  app.src = url;
+  show('app');
+})();
+</script>
 </body>
 </html>
